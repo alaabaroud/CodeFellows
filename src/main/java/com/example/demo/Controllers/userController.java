@@ -5,8 +5,10 @@ import com.example.demo.Repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import java.security.Principal;
 
 @Controller
 
@@ -22,8 +24,13 @@ public class userController {
     }
 
     @GetMapping("/login")
-    public String getSign() {
-        return "signin.html";
+    public String getLoginPage(Principal principal, Model model){
+        try{
+            model.addAttribute("userData",principal.getName());
+        }catch (NullPointerException e){
+            model.addAttribute("userData","");
+        }
+        return "login.html";
     }
 
     @PostMapping("/signup")

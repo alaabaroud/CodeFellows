@@ -5,6 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 
@@ -19,7 +22,25 @@ public class userModel implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+    @OneToMany(mappedBy ="userModel")
+    private List<Post> post;
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+
+    @JoinTable(name = "followersfollowingtable",
+
+            joinColumns = {
+                    @JoinColumn(name="followerid")
+            },
+
+
+            inverseJoinColumns = {
+                    @JoinColumn(name="followingid")
+            })
+    private Set<userModel> followers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "followers")
+    private Set <userModel> following = new HashSet<>();
     public userModel(){}
     public userModel(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
         this.username = username;
@@ -106,4 +127,32 @@ public class userModel implements UserDetails {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+
+    public List<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(List<Post> post) {
+        this.post = post;
+    }
+
+
+    public Set<userModel> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<userModel> followers) {
+        this.followers = followers;
+    }
+
+    public Set<userModel> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<userModel> following) {
+        this.following = following;
+    }
+
+
 }
