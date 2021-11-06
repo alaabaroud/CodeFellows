@@ -50,7 +50,7 @@ public RedirectView addNewPost(Principal principal , @RequestParam String body){
             userModel user = userRepository.findByUsername(principal.getName());
             model.addAttribute("userFollow",user.getFollowers());
         }catch (NullPointerException e){
-            model.addAttribute("userData","");
+            model.addAttribute("userData","userData");
         }
         return "allUsers.html";
     }
