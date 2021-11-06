@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="gerenal.css">
 </head>
 <body>
 <header>
-    <div class="home">
-        <a th:href="@{/signup}">Sign Up</a>
-        <a th:href="@{/login}">Log in</a>
-        <a th:href="@{http://localhost:8080/profile(id=${user})}">Profile</a>
 
-
-    </div>
 </header>
-<main>
+<main style="background-color: #E6DDC4">
 
-    <h1>WELCOME TO CODE FELLOWS</h1>
+    <h1>CODE FELLOWS Website</h1>
+
+    <div class="home">
+        <a href="/signup" >Sign Up Here </a>
+        <br>
+        <a href="/login">Log In Here </a>
+        <br>
+        <a href="/userprofile">user profile </a>
+    </div>
 </main>
 </body>
 </html>

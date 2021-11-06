@@ -5,6 +5,7 @@ import com.example.demo.Model.userModel;
 import com.example.demo.Repository.PostRepo;
 import com.example.demo.Repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.Set;
-
+@Controller
 public class PostController {
 
     @Autowired
@@ -23,7 +24,7 @@ public class PostController {
     PostRepo postRepo;
 
 
-    @GetMapping("/profile")
+    @GetMapping("/userprofile")
     public String UserProfile(Principal principal , Model model) {
         if (userRepository != null) {
             model.addAttribute("userData", principal.getName());
@@ -34,7 +35,7 @@ public class PostController {
         }
         return "user.html";
     }
-@PostMapping("/profile")
+@PostMapping("/userprofile")
 public RedirectView addNewPost(Principal principal , @RequestParam String body){
     Post post = new Post(body , userRepository.findByUsername(principal.getName()));
     postRepo.save(post);

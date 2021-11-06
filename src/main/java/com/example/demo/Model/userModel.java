@@ -41,7 +41,11 @@ public class userModel implements UserDetails {
 
     @ManyToMany(mappedBy = "followers")
     private Set <userModel> following = new HashSet<>();
-    public userModel(){}
+
+
+    public userModel(){
+
+    }
     public userModel(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
         this.username = username;
         this.password = password;

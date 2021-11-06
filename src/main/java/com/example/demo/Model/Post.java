@@ -10,8 +10,18 @@ public class Post {
     private Integer id;
     private String body;
     private int createdAt;
-    @ManyToMany
+//    @ManyToOne
+    @ManyToOne
+    @JoinColumn(name = "user_model_id")
     private userModel userModel;
+
+    public void setUserModel(com.example.demo.Model.userModel userModel) {
+        this.userModel = userModel;
+    }
+
+    public com.example.demo.Model.userModel getUserModel() {
+        return userModel;
+    }
 
     public Post(String body, userModel userModel) {
         this.body = body;
